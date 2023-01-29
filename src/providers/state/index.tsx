@@ -39,8 +39,6 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	React.useEffect(() => {
 		localStorage.setItem(APP_STATE_KEY, JSON.stringify(state.persistedState));
 	}, [state.persistedState]);
-	console.log(state);
-
 	return (
 		<AppContext.Provider value={{ state, dispatch }}>
 			{children}
