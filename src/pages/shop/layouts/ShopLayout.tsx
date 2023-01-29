@@ -8,10 +8,10 @@ type ShopLayoutProps = {
 
 const ShopLayout: React.FunctionComponent<ShopLayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col font-rubik">
       <ShopHeader />
       <div className="w-full bg-neutral-300">
-        <div className=" max-auto w-full max-w-7xl min-h-screen">{children}</div>
+        <div className=" max-auto w-full max-w-7xl min-h-[80vh]">{children}</div>
       </div>
       <ShopFooter />
     </div>
