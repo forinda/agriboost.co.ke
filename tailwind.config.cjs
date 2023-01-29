@@ -10,7 +10,8 @@ module.exports = {
         'system-ui': ['system-ui', 'sans-serif'],
         Asset: ['Asset', 'cursive', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
-        'Rubik-Mono-One': ['Rubik Mono One', 'sans-serif']
+        'Rubik-Mono-One': ['Rubik Mono One', 'sans-serif'],
+        rubik: ['Rubik', 'sans-serif'],
       }
     }
   },

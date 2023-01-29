@@ -15,6 +15,7 @@ const services: HServices[] = [
 	},
 	{
 		title: 'Agricultural Products',
+		url:'/shop',
 		imgUrl:
 			'https://img.freepik.com/free-vector/pet-veterinarian-concept-veterinary-doctor-checking-treating-animal-idea-pet-care-animal-medical-vaccination-microchipping-vector-flat-illustration_613284-488.jpg?w=1060&t=st=1673792251~exp=1673792851~hmac=be3310e4404f8bfec386860e12f99817b7b6050af093bd4e4bbfadc2659ecd66',
 		description: 'We offer agricultural products to farmers and other people',
