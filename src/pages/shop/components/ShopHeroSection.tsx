@@ -26,10 +26,11 @@ const ShopHeroSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 h-full">
           {[1, 2, 3, 4].map((i) => (
             <div
+            key={i}
               style={{ backgroundImage: `url('${img2}')` }}
               className="h-full bg-right bg-cover rounded-md bg-no-repeat border"
             >
-              <div className="h-full w-full p-4 flex flex-col gap-4 bg-gradient-to-r from-neutral-600 text-neutral-100 to-transparent bg-opacity-70">
+              <div className="h-full w-full p-4 flex flex-col gap-4 text-neutral-100">
                 <span>Best offer</span>
                 <div>
                   <h1 className="text-xl">Headphones max</h1>
