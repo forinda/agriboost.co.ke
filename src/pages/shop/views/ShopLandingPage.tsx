@@ -7,7 +7,7 @@ const ShopLandingPage = () => {
   return (
     <div className="w-full h-fulll ">
       <ShopHeroSection />
-      <div className="h-full bg-neutral-300">
+      <div className="h-full bg-neutral-300 py-10">
         <ShopAdvantageSection />
         <ShopCategories />
       </div>
