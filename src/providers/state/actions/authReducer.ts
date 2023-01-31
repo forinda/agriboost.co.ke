@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReducerType } from '../../types/helpers';
-import { AppStateType } from '../types/state';
+import { AppStateType } from '../types';
 import { AuthActions } from './authActions';
 
 const authReducer: ReducerType<AppStateType, AuthActions> = (state, action) => {
@@ -33,6 +33,8 @@ const authReducer: ReducerType<AppStateType, AuthActions> = (state, action) => {
 					},
 				},
 			};
+            case "register-start":
+                return
 		default:
 			return state;
 	}

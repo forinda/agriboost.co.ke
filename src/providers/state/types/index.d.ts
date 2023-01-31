@@ -29,6 +29,7 @@ export type UserType = {
 	role: string;
 	updatedAt: string;
 	username: string;
+	active: boolean;
 	_id: string;
 };
 

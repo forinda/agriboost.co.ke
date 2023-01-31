@@ -9,7 +9,7 @@ import {
 import ShopAdvantageSection from "../components/ShopAdvantageSection";
 import ShopCategories from "../components/ShopCategories";
 import ShopHeroSection from "../components/ShopHeroSection";
-import ShopLandingPageCollectionRow from "../components/ShopLandingPageCollectionRow";
+import FeaturedCollection from "../components/FeaturedCollection";
 import { products } from "../data/products";
 
 const ShopLandingPage = () => {
@@ -20,7 +20,7 @@ const ShopLandingPage = () => {
       <div className="h-full bg-neutral-300 py-10">
         <ShopAdvantageSection />
         <ShopCategories />
-        <ShopLandingPageCollectionRow title="Featured collection">
+        <FeaturedCollection title="Featured collection">
           <div className="py-8 grid grid-cols-12 gap-4">
             {fProducts.map((product) => (
               <div
@@ -74,7 +74,7 @@ const ShopLandingPage = () => {
               </div>
             ))}
           </div>
-        </ShopLandingPageCollectionRow>
+        </FeaturedCollection>
       </div>
     </div>
   );

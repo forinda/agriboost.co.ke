@@ -26,21 +26,25 @@ type InputProps = {
 	value?: string;
 	required?: boolean;
 	defaultValue?: string;
+	autoComplete?: string;
 	onChange?: () => void;
 	onBlur?: () => void;
+	onFocus?: () => void;
+
 };
 
 const Input: React.FunctionComponent<InputProps> = (props) => {
 	const [open, setOpen] = React.useState<boolean>(false);
 
-	const toggleInput = () => {
+	const toggleInput = (e:React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault()
 		setOpen(!open);
 	};
 	return (
 		<div className='w-full'>
 			{props.label ? <label htmlFor={props.name}>{props.label}</label> : null}
 			{props.type === 'password' ? (
-				<div className='flex border px-2 w-full rounded'>
+				<div className='flex border px-2 w-full rounded bg-white'>
 					<input
 						type={open ? 'text' : 'password'}
 						placeholder={props.placeholder}
@@ -52,7 +56,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
 						value={props.value}
 						required={props.required}
 						defaultValue={props.defaultValue}
-                        className="flex-1 border-none outline-none text-lg w-full rounded-md px-4 py-2"
+                        className="flex-1 border-none outline-none text-lg w-full rounded-md px-4 py-2 bg-white"
 					/>
 					<button onClick={toggleInput} className="flex items-center justify-center">
 						{open ? <FaEye /> : <FaRegEyeSlash />}
@@ -61,7 +65,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
 			) : props.type === 'textarea' ? (
 				<div></div>
 			) : (
-				<div className='w-full'>
+				<div className='w-full bg-white'>
                     <input
 						type={props.type}
 						placeholder={props.placeholder}
@@ -73,7 +77,7 @@ const Input: React.FunctionComponent<InputProps> = (props) => {
 						value={props.value}
 						required={props.required}
 						defaultValue={props.defaultValue}
-                        className="flex-1 border outline-none text-lg w-full rounded-md px-4 py-2"
+                        className="flex-1 border outline-none text-lg w-full rounded-md px-4 py-2 bg-transparent"
 					/>
                 </div>
 			)}

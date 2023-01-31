@@ -1,23 +1,23 @@
-import React from 'react';
-import UnauthorizedPage from '../pages/admin/errors/UnauthorizedPage';
-import useAuth from '../shared/hooks/useAuth';
-import LoginRequired from './LoginRequired';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import useAuth from "../shared/hooks/useAuth";
 
 type ModeratorRequiredProps = {
-	children: JSX.Element;
+  children: JSX.Element;
 };
 
 const ModeratorRequired: React.FunctionComponent<ModeratorRequiredProps> = ({
-	children,
+  children,
 }) => {
-	const {
-		auth: { user },
-	} = useAuth();
-	return (
-		<LoginRequired>
-			{user?.role === 'user' || 'moderator' ? children : <UnauthorizedPage />}
-		</LoginRequired>
-	);
+  const {
+    auth: { user },
+  } = useAuth();
+
+  return user?.role === "moderator" || "user" ? (
+    children
+  ) : (
+    <Navigate to={"/"} replace />
+  );
 };
 
 export default ModeratorRequired;

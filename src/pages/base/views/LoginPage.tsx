@@ -1,125 +1,281 @@
-import { AxiosError } from 'axios';
-import React from 'react';
-import { Form, useLocation, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import { publicApi } from '../../../api/axios';
-import Input from '../../../shared/components/Input';
-import useAuth from '../../../shared/hooks/useAuth';
+import { AxiosError } from "axios";
+import React from "react";
+import { Form, Link, redirect, useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { publicApi } from "../../../api/axios";
+import useAuth from "../../../shared/hooks/useAuth";
+import { FaRegEyeSlash, FaEye } from "react-icons/fa";
+import { UserType } from "../../../providers/state/types";
+import Hr from "../../shop/components/Hr";
 
 type LoginProps = {
-	username: string;
-	password: string;
+  username: string;
+  password: string;
 };
 
 const LoginPage = () => {
-	const { dispatch } = useAuth();
-	const locationState = useLocation().state as { from: string };
-	const navigate = useNavigate();
-	const renderRef = React.useRef<boolean>(false);
-	const [loading, setLoading] = React.useState<boolean>(false);
-	const [error, setError] = React.useState<string | null>(null);
+  const { dispatch } = useAuth();
+  const locationState = useLocation().state as { from: string };
+  const navigate = useNavigate();
+  const renderRef = React.useRef<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [errors, setErrors] = React.useState<{ [key: string]: string[] }>({});
+  const [formData, setFormData] = React.useState<LoginProps>({} as LoginProps);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const sendToApi = async (data: LoginProps) => {
+    try {
+      const response = await publicApi.post("/auth/sign-in", data);
+      const accessToken = response.data.access_token;
+      fetchUserprofile(accessToken, data);
+      toast.success("Login successful");
+    } catch (err: any) {
+      if (err instanceof AxiosError) {
+        const { message } = err.response?.data;
+        if (Array.isArray(message)) {
+          const msg = message.join(", ");
+          toast.error(msg);
+        } else {
+          toast.error(message);
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  const fetchUserprofile = async (accessToken: string, data: LoginProps) => {
+    try {
+      const res = await publicApi.get("/auth/profile", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = res.data as UserType;
+      dispatch({
+        type: "login-success",
+        payload: {
+          auth: {
+            user: data,
+            access_token: accessToken,
+            error: "",
+            isAuthenticated: true,
+            loading: false,
+          },
+        },
+      });
+      return locationState
+        ? data.active
+          ? navigate(locationState.from)
+          : navigate("/account/activate", { replace: true })
+        : !data.active
+        ? navigate("/account/activate", { replace: true })
+        : navigate("/", { replace: true });
+    } catch (err: any) {
+      if (err instanceof AxiosError) {
+        const { message } = err.response?.data;
+        if (Array.isArray(message)) {
+          const msg = message.join(", ");
+          toast.error(msg);
+        } else {
+          toast.error(message);
+        }
+      }
+    }
+  };
+  const submitForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (Object.keys(errors).length > 0) {
+      toast.error("Please fix the errors");
+      return;
+    }
+    setErrors({});
+    setLoading(true);
+    sendToApi(formData);
+  };
+  const [submitActive, setSubmitActive] = React.useState<boolean>(true);
 
-	const sendToApi = async (data: LoginProps) => {
-		try {
-			const response = await publicApi.post('/auth/sign-in', data);
-			const accessToken = response.data.access_token;
-			fetchUserprofile(accessToken);
-			toast.success('Login successful');
-		} catch (err: any) {
-			setError(err.response.data.message);
-			toast.error(error);
-		} finally {
-			setLoading(false);
-		}
-	};
-	const fetchUserprofile = async (accessToken: string) => {
-		try {
-			const res = await publicApi.get('/auth/account/profile', {
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-			});
-			const data = res.data;
-			dispatch({
-				type: 'login-success',
-				payload: {
-					auth: {
-						user: data,
-						access_token: accessToken,
-						error: '',
-						isAuthenticated: true,
-						loading: false,
-					},
-				},
-			});
-			return locationState ? navigate(locationState.from) : navigate('/');
-		} catch (err: any) {
-			if (err instanceof AxiosError) {
-				setError(err.response?.data.message);
-			}
-		}
-	};
-	const submitForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-		e.preventDefault();
-		setError(null);
-		const formData = new FormData(e.currentTarget.form!);
-		const data: LoginProps = {
-			username: formData.get('username') as string,
-			password: formData.get('password') as string,
-		};
-		if (data.username === '' || data.password === '') {
-			setError('Please fill all the fields');
-			return;
-		}
-		setLoading(true);
-		sendToApi(data);
-		// publicApi
-	};
+  const erroRegex = {
+    email: /email/i,
+    username: /username/i,
+    password: /password/i,
+  };
+  const seekFormErrors = (e: any) => {
+    const { name, value } = e.target as { name: string; value: string };
+    if (value.length < 1) {
+      setErrors((prev) => ({ ...prev, [name]: ["This field is required"] }));
+    }
+    if (name === "username") {
+      const emailRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      const emailRegex2 =
+        /^(?!.*\.{2})[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
-	React.useEffect(() => {
-		renderRef.current = true;
-		return () => {
-			renderRef.current = false;
-		};
-	}, []);
+      if (!value.match(emailRegex2)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must be a valid email"],
+        }));
+      }
+    }
+    if (name === "password") {
+      if (value.length < 8) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must be at least 8 characters"],
+        }));
+      }
+      if (!value.match(/[A-Z]/)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must contain at least one uppercase letter"],
+        }));
+      }
 
-	console.log(error);
+      if (!value.match(/[0-9]/)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must contain at least one number"],
+        }));
+      }
 
-	return (
-		<div className="flex justify-center min-h-screen w-full items-center bg-gray-300">
-			<Form method="post" className="p-10 bg-white rounded min-w-[30rem]">
-				<ToastContainer position="top-right" />
-				<div className="flex items-center justify-center flex-col p-3">
-					<img src="/logo192.png" alt="" className="h-20 w-20 m-4" />
-					<h1 className="font-bold text-4xl">Login to account</h1>
-				</div>
-				<div className="flex flex-col gap-4">
-					<Input
-						id="username"
-						name="username"
-						type="text"
-						placeholder="Email/username"
-						label="Enter username/email"
-					/>
-					<Input
-						id="password"
-						name="password"
-						type="password"
-						placeholder="Password"
-						label="Password"
-					/>
-					<button
-						type="submit"
-						className="w-full mb-10 bg-blue-600 font-medium text-white text-2xl py-2 px-4 rounded-lg disabled:bg-gray-500 disabled:cursor-not-allowed"
-						onClick={submitForm}
-						disabled={loading ? true : false}
-					>
-						{loading ? 'Loading....' : 'Sign in'}
-					</button>
-				</div>
-			</Form>
-		</div>
-	);
+      if (!value.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must contain at least one special character"],
+        }));
+      }
+
+      if (!value.match(/[a-z]/)) {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: ["This field must contain at least one lowercase letter"],
+        }));
+      }
+    }
+  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setErrors({});
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    seekFormErrors(e);
+  };
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    seekFormErrors(e);
+  };
+  React.useEffect(() => {
+    return () => {
+      renderRef.current = false;
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (
+      Object.keys(errors).length > 0 ||
+      Object.values(formData).includes("")
+    ) {
+      setSubmitActive(false);
+    } else {
+      setSubmitActive(true);
+    }
+  }, [errors, formData]);
+
+  return (
+    <div className="flex justify-center min-h-screen w-full items-center bg-gray-300 font-rubik">
+      <Form className="p-10 bg-white rounded min-w-[30rem]">
+        <ToastContainer position="top-right" />
+        <div className="flex items-center justify-center flex-col p-3">
+          <img src="/logo192.png" alt="" className="h-20 w-20 m-4" />
+          <h1 className="font-medium text-4xl my-2">Login</h1>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="username" className="text-gray-500">
+              Email address
+            </label>
+            <input
+              type="email"
+              autoComplete="true"
+              name="username"
+              id="username"
+              onBlur={handleInputBlur}
+              onChange={handleInputChange}
+              className={`border-2 w-full rounded px-2 py-2 ring-0 focus:ring-0 outline-none focus:outline-none ${
+                errors.username?.length > 0
+                  ? "border-red-300"
+                  : "border-blue-300"
+              }`}
+            />
+            <div>
+              {errors.username?.map((error) => (
+                <p className="text-red-500 text-sm">{error}</p>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="password" className="text-gray-500">
+              Password
+            </label>
+            <div
+              className={`flex items-center px-2 rounded border-2  ${
+                errors.username?.length > 0
+                  ? "border-red-300"
+                  : "border-blue-300"
+              }`}
+            >
+              <input
+                type={showPassword ? "text" : "password"}
+                autoComplete="true"
+                name="password"
+                onBlur={handleInputBlur}
+                onChange={handleInputChange}
+                placeholder="Password"
+                className={`w-full px-2 py-2 ring-0 focus:ring-0 outline-none`}
+              />
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPassword((prev) => !prev);
+                }}
+              >
+                {showPassword ? (
+                  <FaEye className="w-6 h-6" />
+                ) : (
+                  <FaRegEyeSlash className="w-6 h-6" />
+                )}
+              </button>
+            </div>
+            <div>
+              {errors.password?.map((error) => (
+                <p className="text-red-500 text-sm max-w-md capitalize">
+                  {error}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitActive ? false : true}
+            className="w-full mb-10 bg-blue-600 font-medium text-white text-2xl py-2 px-4 rounded-lg disabled:bg-gray-200 disabled:text-neutral-400 disabled:cursor-not-allowed"
+            onClick={async (e) => {
+              e.preventDefault();
+              setErrors({});
+              submitForm(e);
+            }}
+          >
+            {submitActive ? "Sign in" : "Please fill all fields"}
+          </button>
+        </div>
+        <Hr/>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register">
+            <span className="text-blue-600">Sign up</span>
+          </Link>
+        </p>
+      </Form>
+    </div>
+  );
 };
 
 export default LoginPage;
