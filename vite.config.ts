@@ -11,7 +11,7 @@ export default defineConfig({
         manualChunks: {},
       },
     },
-    sourcemap: true,
+    sourcemap: false,
   },
   css: {
     preprocessorOptions: {},
