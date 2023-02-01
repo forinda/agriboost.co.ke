@@ -1,12 +1,11 @@
 import React from 'react';
-import { TiArrowUnsorted } from 'react-icons/ti';
-import { useNavigation, useLoaderData } from 'react-router-dom';
-import { publicApi } from '../../../api/axios';
-import FullPageLoader from '../../../shared/components/FullPageLoader';
+import { useNavigation } from 'react-router-dom';
 import moment from 'moment';
-import THeadWithSort from '../components/THeadWithSort';
 import { PaymentPayload, SortFunction } from '../types';
-import useAuth from '../../../shared/hooks/useAuth';
+import THeadWithSort from '@admin-pages/components/THeadWithSort';
+import { publicApi } from '@api/axios';
+import FullPageLoader from '@shared-comps/FullPageLoader';
+import useAuth from '@shared-hooks/useAuth';
 
 const getStatusStyle = (status: string) => {
 	switch (status) {

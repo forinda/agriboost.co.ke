@@ -1,3 +1,7 @@
+import FeaturedCollection from "@shop-pages/components/FeaturedCollection";
+import ShopAdvantageSection from "@shop-pages/components/ShopAdvantageSection";
+import ShopCategories from "@shop-pages/components/ShopCategories";
+import ShopHeroSection from "@shop-pages/components/ShopHeroSection";
 import React from "react";
 import {
   TfiControlShuffle,
@@ -6,10 +10,6 @@ import {
   TfiShoppingCart,
   TfiStar,
 } from "react-icons/tfi";
-import ShopAdvantageSection from "../components/ShopAdvantageSection";
-import ShopCategories from "../components/ShopCategories";
-import ShopHeroSection from "../components/ShopHeroSection";
-import FeaturedCollection from "../components/FeaturedCollection";
 import { products } from "../data/products";
 
 const ShopLandingPage = () => {

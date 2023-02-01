@@ -1,6 +1,6 @@
+import { AccountActivationTabs } from "@base-pages/views/ActivateAccount";
 import React from "react";
 import { Form } from "react-router-dom";
-import { AccountActivationTabs } from "../../views/ActivateAccount";
 
 type ActivateWithOtpProps = {
   changeTab: (tab: AccountActivationTabs) => void;

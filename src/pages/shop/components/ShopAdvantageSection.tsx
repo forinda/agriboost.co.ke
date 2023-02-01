@@ -1,5 +1,5 @@
+import { advantages } from "@shop-pages/data/advantages";
 import React from "react";
-import { advantages } from "../data/advantages";
 
 const ShopAdvantageSection = () => {
   return (

@@ -1,9 +1,9 @@
+import { UserType } from "@state-provider/types";
+import ActivateWithOtp from "@base-pages/components/account/ActivateWithOtp";
+import ActivationGenerateOTP from "@base-pages/components/account/ActivationGenerateOTP";
+import useAuth from "@shared-hooks/useAuth";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "../../../providers/state/types";
-import useAuth from "../../../shared/hooks/useAuth";
-import ActivateWithOtp from "../components/account/ActivateWithOtp";
-import ActivationGenerateOTP from "../components/account/ActivationGenerateOTP";
 
 export type AccountActivationTabs = "activate" | "regenerate";
 

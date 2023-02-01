@@ -5,8 +5,21 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000 --open --host",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "pnpm clean && ttsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite preview --port 3000 --open --host",
+    "clean": "rimraf dist",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.vue src --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand",
+    "test:debug:watch": "node --inspect-brk ./node_modules/.bin/jest --runInBand --watch",
+    "test:debug:coverage": "node --inspect-brk ./node_modules/.bin/jest --runInBand --coverage",
+    "test:debug:coverage:watch": "node --inspect-brk ./node_modules/.bin/jest --runInBand --coverage --watch",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,md}\"",
+    "prettier:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,css,scss,md}\""
   },
   "dependencies": {
     "axios": "^1.2.2",
@@ -29,8 +42,11 @@
     "@vitejs/plugin-react-swc": "^3.0.1",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
+    "rimraf": "^4.1.2",
     "tailwindcss": "^3.2.4",
+    "ttypescript": "^1.5.15",
     "typescript": "^4.9.4",
+    "typescript-transform-paths": "^3.4.6",
     "vite": "^4.0.4"
   }
 }

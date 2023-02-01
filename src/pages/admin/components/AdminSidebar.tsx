@@ -1,6 +1,6 @@
+import useAuth from '@shared-hooks/useAuth';
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import useAuth from '../../../shared/hooks/useAuth';
 import { SidebarLink } from '../data/links';
 
 type AdminSidebarProps = {

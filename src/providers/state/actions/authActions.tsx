@@ -1,4 +1,4 @@
-import { PayloadMapper } from '../../types/helpers';
+import { PayloadMapper } from '@provider-types/helpers';
 import { AuthStateType } from '../types';
 
 

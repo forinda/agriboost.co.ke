@@ -3,16 +3,15 @@ import React from "react";
 import {
   Form,
   Link,
-  redirect,
   useLocation,
   useNavigate,
 } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { publicApi } from "../../../api/axios";
-import useAuth from "../../../shared/hooks/useAuth";
 import { FaRegEyeSlash, FaEye } from "react-icons/fa";
-import { UserType } from "../../../providers/state/types";
-import Hr from "../../shop/components/Hr";
+import { publicApi } from "@api/axios";
+import useAuth from "@shared-hooks/useAuth";
+import Hr from "@shop-pages/components/Hr";
+import { UserType } from "@state-provider/types";
 
 type LoginProps = {
   username: string;

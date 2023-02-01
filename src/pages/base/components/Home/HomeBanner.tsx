@@ -1,5 +1,5 @@
+import WidthWrap from '@shared-comps/WidthWrap';
 import React from 'react';
-import WidthWrap from '../../../../shared/components/WidthWrap';
 const bgLink =
 'https://plus.unsplash.com/premium_photo-1661773325856-ef5a49024435?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
 let bgLink2 ='https://img.freepik.com/free-vector/hand-drawn-minimal-background_23-2149001650.jpg?w=1380&t=st=1673787915~exp=1673788515~hmac=14d711206fbb7ff57db7f4760b2d3fe7dede079a58c885e7592a31008f729b88'

@@ -1,9 +1,9 @@
+import { publicApi } from "@api/axios";
+import useAuth from "@shared-hooks/useAuth";
 import { AxiosError } from "axios";
 import React from "react";
-import { Form, useLocation, useNavigate, useSubmit } from "react-router-dom";
+import { Form, useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { publicApi } from "../../../api/axios";
-import useAuth from "../../../shared/hooks/useAuth";
 
 type RegisterProps = {
   [key: string]: string;
