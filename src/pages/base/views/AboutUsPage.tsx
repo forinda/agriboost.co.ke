@@ -141,7 +141,6 @@ const AboutUsPage = () => {
           rounded-lg
           shadow-lg
           mt-1
-          hidden
           m-0
           bg-clip-padding
           border-none

@@ -1,5 +1,5 @@
 import { RouteObject } from "react-router-dom";
-import ShopIndexErrorPage from "@shop-pages/errors/ShopIndexErrorPage";
+import ShopIndexErrorPage from "@error-pages/ShopIndexErrorPage";
 import BaseShop from "@shop-pages/views/BaseShop";
 import ShopLandingPage from "@shop-pages/views/ShopLandingPage";
 

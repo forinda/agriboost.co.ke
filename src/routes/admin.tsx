@@ -2,7 +2,7 @@ import React from "react";
 import { RouteObject } from "react-router-dom";
 import FullPageLoader from "@shared-comps/FullPageLoader";
 const AdminBaseErrorElement = React.lazy(
-  () => import("@admin-pages/errors/AdminBaseErrorElement")
+  () => import("@error-pages/AdminBaseErrorElement")
 );
 const AdminRequired = React.lazy(() => import("@base-auth/AdminRequired"));
 const AdminSettings = React.lazy(

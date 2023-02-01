@@ -1,7 +1,7 @@
 import React from "react";
 import useAuth from "@shared-hooks/useAuth";
 import AdminRequired from "@base-auth/AdminRequired";
-import UnauthorizedPage from "@admin-pages/errors/UnauthorizedPage";
+import UnauthorizedPage from "@error-pages/UnauthorizedPage";
 
 type DeveloperRequiredProps = {
   children: JSX.Element;

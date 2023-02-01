@@ -50,7 +50,8 @@
       "@shared-hooks/*": ["src/shared/hooks/*"],
       "@shared-data/*": ["src/shared/data/*"],
       "@shared-constants/*": ["src/shared/constants/*"],
-      "@domain-error/*": ["src/error/*"],
+      "@error-pages/*": ["src/errors/*"],
+      "@routes/*": ["src/routes/*"],
     }
   },
   "include": ["src"],
