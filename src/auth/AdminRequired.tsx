@@ -1,9 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import UnauthorizedPage from "../pages/admin/errors/UnauthorizedPage";
-import useAuth from "../shared/hooks/useAuth";
-import LoginRequired from "./LoginRequired";
-import ModeratorRequired from "./ModeratorRequired";
+import useAuth from "@shared-hooks/useAuth";
+import LoginRequired from "@base-auth/LoginRequired";
 
 type AdminRequiredProps = {
   children: JSX.Element;

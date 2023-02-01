@@ -1,6 +1,6 @@
+import ShopFooter from "@shop-pages/components/ShopFooter";
+import ShopHeader from "@shop-pages/components/ShopHeader";
 import React from "react";
-import ShopFooter from "../components/ShopFooter";
-import ShopHeader from "../components/ShopHeader";
 
 type ShopLayoutProps = {
   children: React.ReactNode;

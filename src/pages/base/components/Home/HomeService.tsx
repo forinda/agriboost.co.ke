@@ -1,6 +1,6 @@
+import { homeServices } from '@shared-data/homeServices';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { homeServices } from '../../../../shared/data/homeServices';
 
 type HomeServiceProps = {
 	title: string;

@@ -1,6 +1,6 @@
+import WidthWrap from '@shared-comps/WidthWrap';
 import React from 'react';
 import { GiWheelbarrow } from 'react-icons/gi';
-import WidthWrap from '../../../../shared/components/WidthWrap';
 import HomeAboutTabs from './HomeAboutTabs';
 import SectionHeader from './SectionHeader';
 

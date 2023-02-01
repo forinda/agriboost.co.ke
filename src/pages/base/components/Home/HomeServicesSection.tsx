@@ -1,9 +1,9 @@
+import WidthWrap from '@shared-comps/WidthWrap';
+import { homeServices } from '@shared-data/homeServices';
 import React from 'react';
-import WidthWrap from '../../../../shared/components/WidthWrap';
-import HomeService from './HomeService';
 import { FcServices } from 'react-icons/fc';
+import HomeService from './HomeService';
 import SectionHeader from './SectionHeader';
-import { homeServices } from '../../../../shared/data/homeServices';
 
 
 const HomeServicesSection = () => {

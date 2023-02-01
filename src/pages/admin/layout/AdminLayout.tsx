@@ -1,7 +1,7 @@
+import AdminHeader from '@admin-pages/components/AdminHeader';
+import AdminSidebar from '@admin-pages/components/AdminSidebar';
+import { sidebarLinks } from '@admin-pages/data/links';
 import React from 'react';
-import AdminHeader from '../components/AdminHeader';
-import AdminSidebar from '../components/AdminSidebar';
-import { sidebarLinks } from '../data/links';
 type AdminLayoutProps = {
 	children: React.ReactNode;
 };

@@ -1,6 +1,6 @@
+import { publicApi } from "@api/axios";
 import { AxiosError } from "axios";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
-import { publicApi } from "../../../api/axios";
 
 export default async function registerAction({ request }: ActionFunctionArgs) {
   const formData = await request.formData();

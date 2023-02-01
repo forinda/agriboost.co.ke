@@ -1,3 +1,4 @@
+import WidthWrap from '@shared-comps/WidthWrap';
 import React from 'react';
 import {
 	FaFacebook,
@@ -9,7 +10,6 @@ import {
 } from 'react-icons/fa';
 import { TfiTimer, TfiMobile } from 'react-icons/tfi';
 import { Link } from 'react-router-dom';
-import WidthWrap from '../../../../shared/components/WidthWrap';
 
 type SocialIcon = {
 	Icon: any;

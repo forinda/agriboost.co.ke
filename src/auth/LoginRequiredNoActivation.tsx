@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../shared/hooks/useAuth";
 import jwtDecode from "jwt-decode";
+import useAuth from "@shared-hooks/useAuth";
 
 type LoginRequiredNoActivationProps = {
   children: JSX.Element;

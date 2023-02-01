@@ -1,7 +1,7 @@
 import React from "react";
-import UnauthorizedPage from "../pages/admin/errors/UnauthorizedPage";
-import useAuth from "../shared/hooks/useAuth";
-import AdminRequired from "./AdminRequired";
+import useAuth from "@shared-hooks/useAuth";
+import AdminRequired from "@base-auth/AdminRequired";
+import UnauthorizedPage from "@admin-pages/errors/UnauthorizedPage";
 
 type DeveloperRequiredProps = {
   children: JSX.Element;
@@ -15,7 +15,7 @@ const DeveloperRequired: React.FunctionComponent<DeveloperRequiredProps> = ({
   } = useAuth();
   return (
     <AdminRequired>
-      {user?.role === "developer" || "admin" || "user"||'moderator' ? (
+      {user?.role === "developer" || "admin" || "user" || "moderator" ? (
         children
       ) : (
         <UnauthorizedPage />

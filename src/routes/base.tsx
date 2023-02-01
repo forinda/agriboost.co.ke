@@ -1,22 +1,22 @@
+import loginAction from "@base-pages/actions/loginAction";
 import React from "react";
 import { Outlet, RouteObject } from "react-router-dom";
-import loginAction from "../pages/base/actions/loginAction";
-// import registerAction from "../pages/base/actions/registerAction";
+// import registerAction from "@base-pages/actions/registerAction";
 import FullPageLoader from "../shared/components/FullPageLoader";
 const LoginRequiredNoActivation = React.lazy(
-  () => import("./../auth/LoginRequiredNoActivation")
+  () => import("@base-auth/LoginRequiredNoActivation")
 );
 const ActivateAccount = React.lazy(
-  () => import("../pages/base/views/ActivateAccount")
+  () => import("@base-pages/views/ActivateAccount")
 );
-const AboutUsPage = React.lazy(() => import("../pages/base/views/AboutUsPage"));
-const LandingPage = React.lazy(() => import("../pages/base/views/LandingPage"));
+const AboutUsPage = React.lazy(() => import("@base-pages/views/AboutUsPage"));
+const LandingPage = React.lazy(() => import("@base-pages/views/LandingPage"));
 const ContactUsPage = React.lazy(
-  () => import("../pages/base/views/ContactUsPage")
+  () => import("@base-pages/views/ContactUsPage")
 );
-const LoginPage = React.lazy(() => import("../pages/base/views/LoginPage"));
+const LoginPage = React.lazy(() => import("@base-pages/views/LoginPage"));
 const RegisterPage = React.lazy(
-  () => import("../pages/base/views/RegisterPage")
+  () => import("@base-pages/views/RegisterPage")
 );
 
 export const BaseRoutes: RouteObject = {

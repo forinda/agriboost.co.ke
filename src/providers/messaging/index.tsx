@@ -1,7 +1,7 @@
+import { wsURL } from "@api/axios";
+import useAuth from "@shared-hooks/useAuth";
 import React, { createContext } from "react";
 import { io, Socket } from "socket.io-client";
-import { wsURL } from "../../api/axios";
-import useAuth from "../../shared/hooks/useAuth";
 import messageReducer from "./reducers/messageReducer";
 import { MessageActionTypes, MessageStateType } from "./types";
 

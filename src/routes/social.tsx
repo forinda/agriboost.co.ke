@@ -1,13 +1,13 @@
+import FullPageLoader from '@shared-comps/FullPageLoader';
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
-import NoChatCard from '../pages/social/Chat/components/NoChatCard';
-import FullPageLoader from '../shared/components/FullPageLoader';
+import NoChatCard from '@social-pages/Chat/components/NoChatCard';
 
-const ChatLayout = React.lazy(() => import('../pages/social/Chat/ChatLayout'));
-const BaseChat = React.lazy(() => import('../pages/social/Chat/BaseChat'));
-const LandingPage = React.lazy(() => import('../pages/social/LandingPage'));
-const ChatNewMessageError= React.lazy(() => import('../pages/social/Chat/errors/ChatNewMessageError'));
-const SingleConversation = React.lazy(() => import('../pages/social/Chat/components/SingleConversation'));
+const ChatLayout = React.lazy(() => import('@social-pages/Chat/ChatLayout'));
+const BaseChat = React.lazy(() => import('@social-pages/Chat/BaseChat'));
+const LandingPage = React.lazy(() => import('@social-pages/LandingPage'));
+const ChatNewMessageError= React.lazy(() => import('@social-pages/Chat/errors/ChatNewMessageError'));
+const SingleConversation = React.lazy(() => import('@social-pages/Chat/components/SingleConversation'));
 
 export const SocialRoutes: RouteObject = {
 	path: '/social',

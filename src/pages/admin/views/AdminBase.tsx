@@ -1,6 +1,6 @@
+import AdminLayout from '@admin-pages/layout/AdminLayout';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import AdminLayout from '../layout/AdminLayout';
 
 const AdminBase = () => {
 	return (

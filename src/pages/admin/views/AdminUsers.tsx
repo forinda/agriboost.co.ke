@@ -1,10 +1,10 @@
+import THeadWithSort from '@admin-pages/components/THeadWithSort';
+import { UserPayload, SortFunction } from '@admin-pages/types';
+import { publicApi } from '@api/axios';
+import FullPageLoader from '@shared-comps/FullPageLoader';
+import useAuth from '@shared-hooks/useAuth';
 import moment from 'moment';
 import React from 'react'
-import { publicApi } from '../../../api/axios';
-import FullPageLoader from '../../../shared/components/FullPageLoader';
-import useAuth from '../../../shared/hooks/useAuth';
-import THeadWithSort from '../components/THeadWithSort';
-import { SortFunction, UserPayload } from '../types';
 
 const AdminUsers = () => {
 	const {auth:{access_token}}=useAuth()

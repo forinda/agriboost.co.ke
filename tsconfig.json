@@ -1,5 +1,22 @@
 {
+  "ts-node": {
+    "transpileOnly": true,
+    "require": ["typescript-transform-paths/register"]
+  },
   "compilerOptions": {
+    "baseUrl": "./",
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true,
+        "exclude": ["**/node_modules/**"]
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "exclude": ["**/node_modules/**"]
+      }
+    ],
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -15,6 +32,26 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {
+      "@typings/*": ["src/typings/*"],
+      "@domain-pages/*": ["src/pages"],
+      "@admin-pages/*": ["src/pages/admin/*"],
+      "@base-pages/*": ["src/pages/base/*"],
+      "@shop-pages/*": ["src/pages/shop/*"],
+      "@social-pages/*": ["src/pages/social/*"],
+      "@base-auth/*": ["src/auth/*"],
+      "@api/*": ["src/api/*"],
+      "@provider-types/*": ["src/providers/types/*"],
+      "@message-provider": ["src/providers/messaging"],
+      "@message-provider/*": ["src/providers/messaging/*"],
+      "@state-provider": ["src/providers/state"],
+      "@state-provider/*": ["src/providers/state/*"],
+      "@shared-comps/*": ["src/shared/components/*"],
+      "@shared-hooks/*": ["src/shared/hooks/*"],
+      "@shared-data/*": ["src/shared/data/*"],
+      "@shared-constants/*": ["src/shared/constants/*"],
+      "@domain-error/*": ["src/error/*"],
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

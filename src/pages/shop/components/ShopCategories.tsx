@@ -1,5 +1,5 @@
+import { categories } from "@shop-pages/data/categories";
 import React from "react";
-import { categories } from "../data/categories";
 
 const ShopCategories = () => {
   const categories1 = React.useMemo(

@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router-dom";
-import ShopIndexErrorPage from "../pages/shop/errors/ShopIndexErrorPage";
-import BaseShop from "../pages/shop/views/BaseShop";
-import ShopLandingPage from "../pages/shop/views/ShopLandingPage";
+import ShopIndexErrorPage from "@shop-pages/errors/ShopIndexErrorPage";
+import BaseShop from "@shop-pages/views/BaseShop";
+import ShopLandingPage from "@shop-pages/views/ShopLandingPage";
 
 export const ShopRoutes: RouteObject = {
   path: "/shop",

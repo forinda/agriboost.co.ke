@@ -1,9 +1,9 @@
+import { publicApi } from "@api/axios";
+import { UserType } from "@state-provider/types";
+import { AccountActivationTabs } from "@base-pages/views/ActivateAccount";
+import useAuth from "@shared-hooks/useAuth";
 import React from "react";
 import { Form } from "react-router-dom";
-import { publicApi } from "../../../../api/axios";
-import { UserType } from "../../../../providers/state/types";
-import useAuth from "../../../../shared/hooks/useAuth";
-import { AccountActivationTabs } from "../../views/ActivateAccount";
 
 type ActivationGenerateOTPProps = {
   changeTab: (tab: AccountActivationTabs) => void;

@@ -1,16 +1,14 @@
-import { MessageActionsPayloads } from '../actions';
-import { PayloadMapper } from './../../types/helpers.d';
+import { PayloadMapper } from "@provider-types/helpers";
+import { MessageActionsPayloads } from "../actions";
 export type MessagePayloadType = {
-	from: string;
-	_id?: string;
-	message: string;
+  from: string;
+  _id?: string;
+  message: string;
 };
 
 export type MessageActionTypes =
-	PayloadMapper<MessageActionsPayloads>[keyof PayloadMapper<MessageActionsPayloads>];
+  PayloadMapper<MessageActionsPayloads>[keyof PayloadMapper<MessageActionsPayloads>];
 
-
-	
 export type MessageStateType = {
-	messages: MessagePayloadType[];
+  messages: MessagePayloadType[];
 };
