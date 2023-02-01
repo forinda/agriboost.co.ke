@@ -199,9 +199,10 @@ const LoginPage = () => {
               autoComplete="true"
               name="username"
               id="username"
+              placeholder="Email address"
               onBlur={handleInputBlur}
               onChange={handleInputChange}
-              className={`border-2 w-full rounded px-2 py-2 ring-0 focus:ring-0 outline-none focus:outline-none ${
+              className={`border-b read-only:text-neutral-400 border-gray-300 w-full py-2 focus:outline-none focus:border-blue-200 read-only:cursor-not-allowed ${
                 errors.username?.length > 0
                   ? "border-red-300"
                   : "border-blue-300"

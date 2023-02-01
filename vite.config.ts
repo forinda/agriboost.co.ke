@@ -38,6 +38,7 @@ export default defineConfig({
       // "@shared-constants/*": ["src/shared/constants/*"],
       // // "@domain-shared/*": ["src/shared/*"],
       // "@domain-error/*": ["src/error/*"],
+      // "@error-pages/*": ["src/errors/*"],
 
       "@typings": path.resolve(__dirname, "src/typings"),
       "@domain-pages": path.resolve(__dirname, "src/pages"),
@@ -56,6 +57,7 @@ export default defineConfig({
       "@shared-constants": path.resolve(__dirname, "src/shared/constants"),
       "@domain-error": path.resolve(__dirname, "src/error"),
       "@domain-shared": path.resolve(__dirname, "src/shared"),
+      "@error-pages": path.resolve(__dirname, "src/errors"),
       
     },
   },

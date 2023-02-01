@@ -51,7 +51,6 @@
       "@shared-data/*": ["src/shared/data/*"],
       "@shared-constants/*": ["src/shared/constants/*"],
       "@error-pages/*": ["src/errors/*"],
-      "@routes/*": ["src/routes/*"],
     }
   },
   "include": ["src"],
