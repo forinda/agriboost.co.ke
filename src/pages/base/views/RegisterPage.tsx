@@ -1,4 +1,5 @@
 import { publicApi } from "@api/axios";
+import FormError from "@base-pages/components/account/FormError";
 import SvgSpinLoader from "@base-pages/components/SvgSpinLoader";
 import useAuth from "@shared-hooks/useAuth";
 import { AxiosError } from "axios";
@@ -186,17 +187,11 @@ const RegisterPage = () => {
         <div className="flex items-center justify-center flex-col p-3">
           <img src="/logo192.png" alt="" className="h-20 w-20 m-4" />
           {showServerErrors && serverError.length > 0 && (
-            <button
-              className="block capitalize w-full bg-red-100 border text-center border-red-400 text-red-700 px-4 py-3 rounded relative"
-              role="alert"
-              onClick={(e) => {
-                setShowServerErrors(false);
-                setServerError("");
-              }}
-            >
-              <strong className="font-bold block text-sm">Server Error!</strong>
-              <span className="block sm:inline text-sm">{serverError}</span>
-            </button>
+            <FormError
+              error={serverError}
+              resetError={setServerError}
+              toggleDisplay={setShowServerErrors}
+            />
           )}
           <h1 className="font-medium text-4xl">Create account</h1>
         </div>
@@ -319,7 +314,7 @@ const RegisterPage = () => {
           >
             {loading ? (
               <div className="flex justify-center">
-               <SvgSpinLoader/>
+                <SvgSpinLoader />
                 {redirecting ? "Redirecting..." : "Creating account..."}
               </div>
             ) : (

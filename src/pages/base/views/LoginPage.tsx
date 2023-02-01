@@ -7,6 +7,8 @@ import { publicApi } from "@api/axios";
 import useAuth from "@shared-hooks/useAuth";
 import Hr from "@shop-pages/components/Hr";
 import { UserType } from "@state-provider/types";
+import SvgSpinLoader from "@base-pages/components/SvgSpinLoader";
+import FormError from "@base-pages/components/account/FormError";
 
 type LoginProps = {
   username: string;
@@ -23,23 +25,36 @@ const LoginPage = () => {
   const renderRef = React.useRef<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [errors, setErrors] = React.useState<{ [key: string]: string[] }>({});
+  const [showServerErrors, setShowServerErrors] =
+    React.useState<boolean>(false);
+  const [serverError, setServerError] = React.useState<string>("");
   const [formData, setFormData] = React.useState<LoginProps>({} as LoginProps);
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const sendToApi = async (data: LoginProps) => {
     try {
+      setErrors({});
+      setShowServerErrors(false);
+      setLoading(true);
+      setServerError("");
       const response = await publicApi.post("/auth/sign-in", data);
       const accessToken = response.data.access_token;
       fetchUserprofile(accessToken, data);
       toast.success("Login successful");
     } catch (err: any) {
+      if (err instanceof AxiosError && err.message) {
+        setServerError(err.message);
+      }
       if (err instanceof AxiosError) {
         const { message } = err.response?.data;
         if (Array.isArray(message)) {
           const msg = message.join(", ");
-          toast.error(msg);
+          // toast.error(msg);
+          setServerError(msg);
         } else {
-          toast.error(message);
+          // toast.error(message);
+          setServerError(message);
         }
+        setShowServerErrors(true);
       }
     } finally {
       setLoading(false);
@@ -65,12 +80,19 @@ const LoginPage = () => {
           },
         },
       });
-      if (locationState) {
-        navigate(locationState.from);
+      if (data.active === false) {
+        return navigate("/account/activate", { replace: true });
+      }
+      if (locationState && locationState.from) {
+        return navigate(locationState.from, { replace: true });
       } else {
-        navigate("/");
+        console.log("from else");
+        
+        return navigate("/", { replace: true });
       }
     } catch (err: any) {
+      console.log(err);
+      
       if (err instanceof AxiosError) {
         const { message } = err.response?.data;
         if (Array.isArray(message)) {
@@ -162,8 +184,6 @@ const LoginPage = () => {
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     seekFormErrors(e);
   };
-console.log({isAuthenticated});
-
   React.useEffect(() => {
     if (!renderRef.current) {
       if (isAuthenticated) {
@@ -194,6 +214,13 @@ console.log({isAuthenticated});
         <ToastContainer position="top-right" />
         <div className="flex items-center justify-center flex-col p-3">
           <img src="/logo192.png" alt="" className="h-20 w-20 m-4" />
+          {showServerErrors && serverError.length > 0 && (
+            <FormError
+              error={serverError}
+              resetError={setServerError}
+              toggleDisplay={setShowServerErrors}
+            />
+          )}
           <h1 className="font-medium text-4xl my-2">Login</h1>
         </div>
         <div className="flex flex-col gap-4">
@@ -276,7 +303,7 @@ console.log({isAuthenticated});
 
           <button
             type="submit"
-            disabled={submitActive ? false : true}
+            disabled={loading || Object.values(errors).length > 0}
             className="bg-blue-500 text-white rounded-md my-4 px-4 py-2 w-full disabled:opacity-75 disabled:cursor-not-allowed"
             onClick={async (e) => {
               e.preventDefault();
@@ -284,7 +311,16 @@ console.log({isAuthenticated});
               submitForm(e);
             }}
           >
-            {submitActive ? "Sign in" : "Please fill all fields"}
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <SvgSpinLoader />
+                <span>
+                  <span className="">Loading...</span>
+                </span>
+              </div>
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
         <Hr />
