@@ -1,6 +1,12 @@
 import { AxiosError } from "axios";
 import React from "react";
-import { Form, Link, redirect, useLocation, useNavigate } from "react-router-dom";
+import {
+  Form,
+  Link,
+  redirect,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { publicApi } from "../../../api/axios";
 import useAuth from "../../../shared/hooks/useAuth";
@@ -62,13 +68,11 @@ const LoginPage = () => {
           },
         },
       });
-      return locationState
-        ? data.active
-          ? navigate(locationState.from)
-          : navigate("/account/activate", { replace: true })
-        : !data.active
-        ? navigate("/account/activate", { replace: true })
-        : navigate("/", { replace: true });
+      if (locationState) {
+        navigate(locationState.from);
+      } else {
+        navigate("/");
+      }
     } catch (err: any) {
       if (err instanceof AxiosError) {
         const { message } = err.response?.data;
@@ -266,7 +270,7 @@ const LoginPage = () => {
             {submitActive ? "Sign in" : "Please fill all fields"}
           </button>
         </div>
-        <Hr/>
+        <Hr />
         <p>
           Don't have an account?{" "}
           <Link to="/register">

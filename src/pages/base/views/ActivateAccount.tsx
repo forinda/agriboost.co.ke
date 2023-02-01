@@ -1,67 +1,43 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { UserType } from "../../../providers/state/types";
+import useAuth from "../../../shared/hooks/useAuth";
 import ActivateWithOtp from "../components/account/ActivateWithOtp";
 import ActivationGenerateOTP from "../components/account/ActivationGenerateOTP";
 
-type Tabs = "activate" | "regenerate";
-
-type ButtonProps = {
-  tab: Tabs;
-  changeTab: (tab: Tabs) => void;
-  currentTab: Tabs;
-  disabled?: boolean;
-  label: string;
-};
-
-const Button: React.FunctionComponent<ButtonProps> = (props) => {
-  const tabMatch = props.currentTab === props.tab;
-  return (
-    <button
-      disabled={props.currentTab === props.tab}
-      onClick={() => props.changeTab(props.tab)}
-      className={`py-2 px-4 text-center border-b ${tabMatch&&"border-b-blue-500 text-blue-600 border"}} first:border-r last:border-l border-gray-300`}
-    >
-      {props.label}
-    </button>
-  );
-};
+export type AccountActivationTabs = "activate" | "regenerate";
 
 const ActivateAccount = () => {
-  const [tab, setTab] = React.useState<Tabs>("activate");
-
-  const changeTab = (tab: Tabs) => {
+  const [tab, setTab] = React.useState<AccountActivationTabs>("activate");
+  const changeTab = (tab: AccountActivationTabs) => {
     setTab(tab);
   };
-
+  const renderRef = React.useRef<boolean>(false);
+  const user = useAuth().auth.user as UserType;
   const getTab = () => {
     switch (tab) {
       case "activate":
-        return <ActivateWithOtp />;
+        return <ActivateWithOtp tab="regenerate" changeTab={changeTab} />;
       case "regenerate":
-        return <ActivationGenerateOTP />;
+        return <ActivationGenerateOTP tab="activate" changeTab={changeTab} />;
       default:
-        return <ActivateWithOtp />;
+        return <ActivateWithOtp tab="regenerate" changeTab={changeTab} />;
     }
   };
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (renderRef.current) {
+      if (user?.active) {
+        navigate("/");
+      }
+    }
+    renderRef.current = true;
+  }, []);
 
   return (
-    <div className="container min-h-screen w-full flex justify-center items-center">
-      <div className="w-full max-w-3xl px-5 p-10 shadow-lg border mx-auto">
-        <div className="grid grid-cols-2 w-full">
-          <Button
-            label="Activate account"
-            currentTab={tab}
-            changeTab={changeTab}
-            tab={"activate"}
-          />
-          <Button
-            label="Regenerate OTP"
-            currentTab={tab}
-            changeTab={changeTab}
-            tab={"regenerate"}
-          />
-        </div>
-        <div>{getTab()}</div>
-      </div>
+    <div className="container mx-auto min-h-screen w-full flex justify-center items-center font-rubik">
+      <div>{getTab()}</div>
     </div>
   );
 };

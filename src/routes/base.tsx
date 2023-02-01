@@ -2,9 +2,13 @@ import React from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 import loginAction from "../pages/base/actions/loginAction";
 // import registerAction from "../pages/base/actions/registerAction";
-import ActivateAccount from "../pages/base/views/ActivateAccount";
 import FullPageLoader from "../shared/components/FullPageLoader";
-
+const LoginRequiredNoActivation = React.lazy(
+  () => import("./../auth/LoginRequiredNoActivation")
+);
+const ActivateAccount = React.lazy(
+  () => import("../pages/base/views/ActivateAccount")
+);
 const AboutUsPage = React.lazy(() => import("../pages/base/views/AboutUsPage"));
 const LandingPage = React.lazy(() => import("../pages/base/views/LandingPage"));
 const ContactUsPage = React.lazy(
@@ -24,34 +28,39 @@ export const BaseRoutes: RouteObject = {
   ),
   children: [
     {
-      path: "/about",
+      path: "about",
       element: <AboutUsPage />,
     },
     {
-      path: "/",
+      // path: "/",
+      index: true,
       element: <LandingPage />,
     },
     {
-      path: "/contact",
+      path: "contact",
       element: <ContactUsPage />,
     },
     {
-      path: "/profile",
+      path: "profile",
       element: <div>profile</div>,
     },
     {
-      path: "/login",
+      path: "login",
       element: <LoginPage />,
       action: loginAction,
     },
     {
-      path: "/register",
+      path: "register",
       element: <RegisterPage />,
       //   action: registerAction,
     },
     {
       path: "account/activate",
-      element: <ActivateAccount />,
+      element: (
+        <LoginRequiredNoActivation>
+          <ActivateAccount />
+        </LoginRequiredNoActivation>
+      ),
     },
   ],
 };

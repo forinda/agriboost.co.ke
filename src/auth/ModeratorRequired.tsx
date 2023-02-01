@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import useAuth from "../shared/hooks/useAuth";
+import LoginRequired from "./LoginRequired";
 
 type ModeratorRequiredProps = {
   children: JSX.Element;
@@ -13,10 +14,14 @@ const ModeratorRequired: React.FunctionComponent<ModeratorRequiredProps> = ({
     auth: { user },
   } = useAuth();
 
-  return user?.role === "moderator" || "user" ? (
-    children
-  ) : (
-    <Navigate to={"/"} replace />
+  return (
+    <LoginRequired>
+      {user?.role === ("moderator" || "admin" || "developer") ? (
+        children
+      ) : (
+        <Navigate to={"/"} replace />
+      )}
+    </LoginRequired>
   );
 };
 

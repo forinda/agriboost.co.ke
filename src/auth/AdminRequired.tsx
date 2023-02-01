@@ -15,10 +15,11 @@ const AdminRequired: React.FunctionComponent<AdminRequiredProps> = ({
   const {
     auth: { user },
   } = useAuth();
+  console.log({ role: user?.role });
 
   return (
     <LoginRequired>
-      {user?.role === "admin" || "moderator" || "user" ? (
+      {user?.role === ("admin" || "developer") ? (
         children
       ) : (
         <Navigate to={"/"} replace />
