@@ -34,7 +34,7 @@ const authReducer: ReducerType<AppStateType, AuthActions> = (state, action) => {
 				},
 			};
             case "register-start":
-                return
+                return state
 		default:
 			return state;
 	}
