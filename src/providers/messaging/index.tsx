@@ -57,8 +57,6 @@ const MessageProvider = ({ children }: MessageProviderProps) => {
       console.log(socketRef.current);
     }
   }, []);
-console.log(isAuthenticated);
-
   return (
     <MessageContext.Provider value={{ state, dispatch }}>
       {children}

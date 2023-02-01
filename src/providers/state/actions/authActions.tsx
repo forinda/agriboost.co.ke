@@ -1,5 +1,5 @@
 import { PayloadMapper } from '../../types/helpers';
-import { AuthStateType } from '../types/state';
+import { AuthStateType } from '../types';
 
 
 export type AuthActionsPayload = {

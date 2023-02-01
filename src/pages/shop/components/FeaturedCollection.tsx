@@ -1,13 +1,13 @@
 import React from "react";
 import { TiChevronLeft, TiChevronRight } from "react-icons/ti";
 
-type ShopLandingPageCollectionRowProps = {
+type FeaturedCollectionProps = {
   children: JSX.Element;
   title: string;
 };
 
-const ShopLandingPageCollectionRow: React.FunctionComponent<
-  ShopLandingPageCollectionRowProps
+const FeaturedCollection: React.FunctionComponent<
+  FeaturedCollectionProps
 > = ({ children, title }) => {
   return (
     <div className="container mx-auto py-10">
@@ -23,4 +23,4 @@ const ShopLandingPageCollectionRow: React.FunctionComponent<
   );
 };
 
-export default ShopLandingPageCollectionRow;
+export default FeaturedCollection;

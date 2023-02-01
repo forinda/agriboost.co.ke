@@ -3,13 +3,13 @@ import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../shared/hooks/useAuth";
 import jwtDecode from "jwt-decode";
 
-type LoginRequiredProps = {
+type LoginRequiredNoActivationProps = {
   children: JSX.Element;
 };
 
-const LoginRequired: React.FunctionComponent<LoginRequiredProps> = ({
-  children,
-}) => {
+const LoginRequiredNoActivation: React.FunctionComponent<
+  LoginRequiredNoActivationProps
+> = ({ children }) => {
   const { auth, dispatch } = useAuth();
   const pathName = useLocation().pathname;
   const { isAuthenticated, access_token, user } = auth;
@@ -27,14 +27,14 @@ const LoginRequired: React.FunctionComponent<LoginRequiredProps> = ({
   }, [access_token]);
 
   return isAuthenticated ? (
-    user?.active ? (
-      children
-    ) : (
-      <Navigate to={`/account/activate`} state={{ from: pathName }} replace/>
-    )
+    children
   ) : (
-    <Navigate to={`/login?redirect=${pathName}`} state={{ from: pathName }} replace />
+    <Navigate
+      to={`/login?redirect=${pathName}`}
+      state={{ from: pathName }}
+      replace
+    />
   );
 };
 
-export default LoginRequired;
+export default LoginRequiredNoActivation;
