@@ -1,11 +1,6 @@
 import { AxiosError } from "axios";
 import React from "react";
-import {
-  Form,
-  Link,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { FaRegEyeSlash, FaEye } from "react-icons/fa";
 import { publicApi } from "@api/axios";
@@ -19,7 +14,10 @@ type LoginProps = {
 };
 
 const LoginPage = () => {
-  const { dispatch } = useAuth();
+  const {
+    dispatch,
+    auth: { isAuthenticated },
+  } = useAuth();
   const locationState = useLocation().state as { from: string };
   const navigate = useNavigate();
   const renderRef = React.useRef<boolean>(false);
@@ -164,7 +162,16 @@ const LoginPage = () => {
   const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     seekFormErrors(e);
   };
+console.log({isAuthenticated});
+
   React.useEffect(() => {
+    if (!renderRef.current) {
+      if (isAuthenticated) {
+        locationState?.from
+          ? navigate(locationState.from)
+          : navigate("/", { replace: true });
+      }
+    }
     return () => {
       renderRef.current = false;
     };
@@ -199,18 +206,22 @@ const LoginPage = () => {
               autoComplete="true"
               name="username"
               id="username"
+              disabled={loading}
+              readOnly={loading}
               placeholder="Email address"
               onBlur={handleInputBlur}
               onChange={handleInputChange}
-              className={`border-b read-only:text-neutral-400 border-gray-300 w-full py-2 focus:outline-none focus:border-blue-200 read-only:cursor-not-allowed ${
+              className={`border-b px-2 disabled:text-neutral-300 read-only:text-neutral-400 border-gray-300 w-full py-2 focus:outline-none focus:border-blue-200 read-only:cursor-not-allowed ${
                 errors.username?.length > 0
                   ? "border-red-300"
                   : "border-blue-300"
               }`}
             />
             <div>
-              {errors.username?.map((error,idx) => (
-                <p key={idx} className="text-red-500 text-sm">{error}</p>
+              {errors.username?.map((error, idx) => (
+                <p key={idx} className="text-red-500 text-sm">
+                  {error}
+                </p>
               ))}
             </div>
           </div>
@@ -220,10 +231,10 @@ const LoginPage = () => {
               Password
             </label>
             <div
-              className={`flex items-center px-2 rounded border-2  ${
+              className={`flex items-center px-2 border-b  ${
                 errors.username?.length > 0
-                  ? "border-red-300"
-                  : "border-blue-300"
+                  ? "border-b-red-300"
+                  : "border-b-blue-300"
               }`}
             >
               <input
@@ -232,8 +243,11 @@ const LoginPage = () => {
                 name="password"
                 onBlur={handleInputBlur}
                 onChange={handleInputChange}
+                id="password"
+                disabled={loading}
+                readOnly={loading}
                 placeholder="Password"
-                className={`w-full px-2 py-2 ring-0 focus:ring-0 outline-none`}
+                className={`w-full px-2 py-2 ring-0 focus:ring-0 outline-none read-only:text-neutral-300 read-only:cursor-not-allowed disabled:text-neutral-300 disabled:cursor-not-allowed focus:outline-none focus:border-blue-200`}
               />
               <button
                 onClick={(e) => {
@@ -249,8 +263,11 @@ const LoginPage = () => {
               </button>
             </div>
             <div>
-              {errors.password?.map((error,idx) => (
-                <p key={idx} className="text-red-500 text-sm max-w-md capitalize">
+              {errors.password?.map((error, idx) => (
+                <p
+                  key={idx}
+                  className="text-red-500 text-sm max-w-md capitalize"
+                >
                   {error}
                 </p>
               ))}
@@ -260,7 +277,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={submitActive ? false : true}
-            className="w-full mb-10 bg-blue-600 font-medium text-white text-2xl py-2 px-4 rounded-lg disabled:bg-gray-200 disabled:text-neutral-400 disabled:cursor-not-allowed"
+            className="bg-blue-500 text-white rounded-md my-4 px-4 py-2 w-full disabled:opacity-75 disabled:cursor-not-allowed"
             onClick={async (e) => {
               e.preventDefault();
               setErrors({});
