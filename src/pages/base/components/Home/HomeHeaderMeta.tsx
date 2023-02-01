@@ -71,7 +71,7 @@ const HomeHeaderMeta = () => {
           {isAuthenticated ? (
             <div>
               <div className="flex items-center gap-4 relative group">
-                <button className="text-sm font-semibold flex items-center gap-4">
+                <div className="text-sm font-semibold flex items-center gap-4">
                   <span>{user?.username}</span>
                   <img
                     src={user?.avatar}
@@ -106,7 +106,7 @@ const HomeHeaderMeta = () => {
                       Logout
                     </button>
                   </div>
-                </button>
+                </div>
               </div>
             </div>
           ) : (
