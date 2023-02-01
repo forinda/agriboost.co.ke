@@ -4,7 +4,7 @@ The service is dedicated to offer the following services
 - Agricultural extension services
 - Online shopping(Agrovet)
 - Regular feeds for farmers on what's new in the market
-- Social interface to 
+- Social interface to interact
 
 # Contributions
 
