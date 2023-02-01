@@ -8,7 +8,7 @@ const ShopAdvantageSection = () => {
         {advantages.map((advantage) => {
           const { title, description, Icon } = advantage;
           return (
-            <div className="flex gap-3 items-center justify-center w-full h-[100px] border rounded-md">
+            <div key={title} className="flex gap-3 items-center justify-center w-full h-[100px] border rounded-md">
               <Icon className="text-6xl text-neutral-500" />
               <div>
                 <div className="text-xl font-bold text-neutral-700">

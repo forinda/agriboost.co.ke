@@ -181,8 +181,8 @@ const RegisterPage = () => {
               }`}
             />
             <div>
-              {errors.email?.map((error) => (
-                <p className="text-red-500 text-sm">{error}</p>
+              {errors.email?.map((error,idx) => (
+                <p key={idx} className="text-red-500 text-sm">{error}</p>
               ))}
             </div>
           </div>
@@ -199,8 +199,8 @@ const RegisterPage = () => {
               className="border borde-1 w-full px-2 py-2 ring-0 focus:ring-0 border-neutral-500"
             />
             <div>
-              {errors.username?.map((error) => (
-                <p className="text-red-500 text-sm max-w-md capitalize">
+              {errors.username?.map((error,idx) => (
+                <p key={idx} className="text-red-500 text-sm max-w-md capitalize">
                   {error}
                 </p>
               ))}

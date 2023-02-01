@@ -209,8 +209,8 @@ const LoginPage = () => {
               }`}
             />
             <div>
-              {errors.username?.map((error) => (
-                <p className="text-red-500 text-sm">{error}</p>
+              {errors.username?.map((error,idx) => (
+                <p key={idx} className="text-red-500 text-sm">{error}</p>
               ))}
             </div>
           </div>
@@ -249,8 +249,8 @@ const LoginPage = () => {
               </button>
             </div>
             <div>
-              {errors.password?.map((error) => (
-                <p className="text-red-500 text-sm max-w-md capitalize">
+              {errors.password?.map((error,idx) => (
+                <p key={idx} className="text-red-500 text-sm max-w-md capitalize">
                   {error}
                 </p>
               ))}
