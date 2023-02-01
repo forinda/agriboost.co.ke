@@ -33,11 +33,11 @@ const AdminUsers = () => {
 			const res = await publicApi.get('/users',{params:{limit:1000,page:1},headers:{
 				authorization:`Bearer ${access_token}`
 			}});
-			console.log(res.data);
+			// console.log(res.data);
 
 			setUsers(res.data);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		} finally {
 			setLoading(false);
 		}

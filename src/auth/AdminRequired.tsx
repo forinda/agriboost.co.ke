@@ -13,7 +13,6 @@ const AdminRequired: React.FunctionComponent<AdminRequiredProps> = ({
   const {
     auth: { user },
   } = useAuth();
-  console.log({ role: user?.role });
 
   return (
     <LoginRequired>

@@ -60,7 +60,7 @@ const AdminPayments = () => {
 			});
 			setPayments(res.data);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		} finally {
 			setLoading(false);
 		}

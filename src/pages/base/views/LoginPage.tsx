@@ -86,13 +86,10 @@ const LoginPage = () => {
       if (locationState && locationState.from) {
         return navigate(locationState.from, { replace: true });
       } else {
-        console.log("from else");
         
         return navigate("/", { replace: true });
       }
     } catch (err: any) {
-      console.log(err);
-      
       if (err instanceof AxiosError) {
         const { message } = err.response?.data;
         if (Array.isArray(message)) {

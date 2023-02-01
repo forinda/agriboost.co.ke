@@ -5,8 +5,6 @@ import { ActionFunctionArgs, redirect } from "react-router-dom";
 export default async function registerAction({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData.entries());
-  console.log({ data, act: "Register Action" });
-
   try {
     await publicApi.post("/auth/sign-up", data);
     return redirect("/account/activate", 201);

@@ -4,7 +4,6 @@ import { useNavigate, useRouteError } from "react-router-dom";
 const IndexErrorPage = () => {
   const error = useRouteError() as any;
   const navigate = useNavigate();
-  console.log({ error });
 
   return (
     <div className="flex justify-center min-h-screen w-full items-center bg-gray-300">

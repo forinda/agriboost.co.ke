@@ -37,11 +37,10 @@ const AdminRoles = () => {
 					authorization: `Bearer ${access_token}`,
 				},
 			});
-			console.log(res);
 
 			setRoles(res.data);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		} finally {
 			setLoading(false);
 		}
