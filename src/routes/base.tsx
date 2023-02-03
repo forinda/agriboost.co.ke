@@ -1,4 +1,6 @@
 import loginAction from "@base-pages/actions/loginAction";
+import Profile from "@base-pages/views/Profile";
+import UserProfile from "@base-pages/views/UserProfile";
 import React from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 // import registerAction from "@base-pages/actions/registerAction";
@@ -15,9 +17,7 @@ const ContactUsPage = React.lazy(
   () => import("@base-pages/views/ContactUsPage")
 );
 const LoginPage = React.lazy(() => import("@base-pages/views/LoginPage"));
-const RegisterPage = React.lazy(
-  () => import("@base-pages/views/RegisterPage")
-);
+const RegisterPage = React.lazy(() => import("@base-pages/views/RegisterPage"));
 
 export const BaseRoutes: RouteObject = {
   path: "/",
@@ -42,7 +42,33 @@ export const BaseRoutes: RouteObject = {
     },
     {
       path: "profile",
-      element: <div>profile</div>,
+      element: <Profile />,
+      children: [
+        {
+          path: "/profile",
+          element: <UserProfile />,
+        },
+        {
+          path: "/profile/settings",
+          element: <div>Settings</div>,
+        },
+        {
+          path: "/profile/orders",
+          element: <div>Orders</div>,
+        },
+        {
+          path: "/profile/wishlist",
+          element: <div>Wishlist</div>,
+        },
+        {
+          path: "/profile/edit",
+          element: <div>Edit Profile</div>,
+        },
+        {
+          path: "/profile/courses",
+          element: <div>Courses</div>,
+        }
+      ],
     },
     {
       path: "login",

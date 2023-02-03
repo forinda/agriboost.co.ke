@@ -29,11 +29,13 @@ const ActivateAccount = () => {
   React.useEffect(() => {
     if (renderRef.current) {
       if (user?.active) {
+        console.log("Fired");
+
         navigate("/");
       }
     }
     renderRef.current = true;
-  }, []);
+  }, [user]);
 
   return (
     <div className="container mx-auto min-h-screen w-full flex justify-center items-center font-rubik">
